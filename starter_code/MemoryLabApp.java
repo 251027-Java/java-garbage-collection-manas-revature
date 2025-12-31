@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,14 +16,35 @@ public class MemoryLabApp {
         printMemoryStatus("Initial");
 
         List<byte[]> memoryBlocks = new ArrayList<>();
+        byte[] mem;
+        int counter = 0;
 
-        // TODO: Implement the following
         // 1. Allocate memory in a loop (e.g., 1MB chunks)
         // 2. Print memory status after each allocation
         // 3. Handle OutOfMemoryError gracefully
         // 4. Add a small delay between allocations for observation
 
         // Your code here:
+        while(counter < 1000) {
+            // 1MB chunk created
+            mem = new byte[1024 * 1024];
+            Arrays.fill(mem, (byte) counter);
+
+            // Chunk added to list
+            memoryBlocks.add(mem);
+
+            // Memory Status
+            printMemoryStatus(counter + "-nth");
+            counter++;
+
+            // Delay
+            Thread.sleep(1000);
+
+            // OutOfMemoryError is handled by
+            // -XX:+ExitOnOutOfMemoryError
+            // in CLI
+        }
+
 
         printMemoryStatus("Final");
     }

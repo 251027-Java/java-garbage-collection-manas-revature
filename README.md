@@ -28,9 +28,9 @@ java -Xms128m -Xmx256m -Xlog:gc*:file=gc.log:time,uptime MemoryLabApp
 ```
 
 **Questions to Answer**:
-1. How many Minor GCs occurred?
-2. How many Major/Full GCs occurred?
-3. What was the longest GC pause time?
+1. How many Minor GCs occurred? 5
+2. How many Major/Full GCs occurred? 5
+3. What was the longest GC pause time? 21.677ms
 
 ### Task 3: Compare Garbage Collectors
 Run the application with different GC algorithms:
@@ -50,9 +50,9 @@ java -XX:+UseZGC -Xmx256m -Xlog:gc*:file=gc-zgc.log MemoryLabApp
 
 | GC Type | Total GC Events | Longest Pause | Throughput |
 |---------|-----------------|---------------|------------|
-| Serial  |                 |               |            |
-| G1GC    |                 |               |            |
-| ZGC     |                 |               |            |
+| Serial  | 8               | 110 ms        | 99.89%     |
+| G1GC    | 10              | 10 ms         | 99.98%     |
+| ZGC     | 25              | .047 ms       | 99.99%     |
 
 ### Task 4: Tune for Low Latency
 Configure G1GC to target a maximum pause time of 100ms:
@@ -62,8 +62,8 @@ java -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -Xmx256m MemoryLabApp
 ```
 
 **Questions**:
-1. Did G1GC achieve the target pause time?
-2. What trade-offs did you observe?
+1. Did G1GC achieve the target pause time? Yes, the max pause time was 20 ms.
+2. What trade-offs did you observe? The pause times were below 100 ms, but the total pause time was higher.
 
 ## Deliverables
 1. Completed `MemoryLabApp.java`
